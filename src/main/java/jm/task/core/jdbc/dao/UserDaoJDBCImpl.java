@@ -22,7 +22,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     "`name` VARCHAR(45) NOT NULL," +
                     "`lastName` VARCHAR(45) NOT NULL," +
                     "`age` INT NOT NULL,PRIMARY KEY (`id`))");
-            System.out.println("создал Т");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             Statement statement = Util.getConnection().createStatement();
             statement.executeUpdate("DROP TABLE IF EXISTS user");
-            System.out.println(" удалена Т");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -48,7 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
            // statement.executeUpdate("INSERT INTO `newschema`.`user` (`name`, `lastName`, `age`) " +
              //       "VALUES ('name', 'lastName', 'age');\n");
             statement.executeUpdate(String.format(("INSERT INTO user (name, lastName, age) VALUES ('%s', '%s', %d)"), name, lastName, age));
-            System.out.println("сохранил Ю");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
