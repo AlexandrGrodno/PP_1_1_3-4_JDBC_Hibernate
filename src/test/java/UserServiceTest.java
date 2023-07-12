@@ -19,6 +19,7 @@ public class UserServiceTest {
         try {
             userService.dropUsersTable();
             userService.dropUsersTable();
+            System.out.printf("dddddddddddddddddddddddddddddddd");
         } catch (Exception e) {
             Assert.fail("При тестировании удаления таблицы произошло исключение\n" + e);
         }
@@ -27,8 +28,10 @@ public class UserServiceTest {
     @Test
     public void createUsersTable() {
         try {
+            System.out.printf("1");
             userService.dropUsersTable();
             userService.createUsersTable();
+            System.out.printf("2");
         } catch (Exception e) {
             Assert.fail("При тестировании создания таблицы пользователей произошло исключение\n" + e.getMessage());
         }
