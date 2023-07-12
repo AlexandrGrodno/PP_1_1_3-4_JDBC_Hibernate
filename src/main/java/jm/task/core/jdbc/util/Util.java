@@ -8,6 +8,7 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import java.util.Properties;
 public class Util {
     // реализуйте настройку соеденения с БД
     public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/newschema?useSSL=false";
+    public static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/newschema";
     public static final String DB_USERNAME = "root";
     public static final String DB_PASSWORD = "52532137";
     public static SessionFactory getConnectionHibernate(){
@@ -42,6 +43,7 @@ public class Util {
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();
+        System.out.printf("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
 
       return  configuration.buildSessionFactory(serviceRegistry);
     }

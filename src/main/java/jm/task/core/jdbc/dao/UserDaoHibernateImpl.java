@@ -1,11 +1,11 @@
 package jm.task.core.jdbc.dao;
 
-import com.mysql.cj.Query;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+
+import org.hibernate.*;
+import jakarta.persistence.*;
+
 
 import java.util.List;
 
@@ -21,8 +21,9 @@ public class UserDaoHibernateImpl implements UserDao {
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
-            session.createQuery("CREATE TABLE IF NOT EXISTS user (id INT NOT NULL AUTO_INCREMENT, firstName" +
-                    " VARCHAR(255), lastName VARCHAR(255), age INT(3), PRIMARY KEY (id))").executeUpdate();
+            session. createQuery("CREATE TABLE IF NOT EXISTS user " +
+                    "(id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(45), " +
+                    "lastName VARCHAR(45), age TINYINT)").executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -38,18 +39,22 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void dropUsersTable() {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        try{ session.beginTransaction();
         session.createQuery("DROP TABLE IF EXISTS user").executeUpdate();
         session.getTransaction().commit();
-        session.close();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+        session.close();}
     }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-
-        session.save(new User(name,lastName,age));
+        System.out.printf("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+        session.persist(new User(name,lastName,age));
         session.getTransaction().commit();
     }
 
